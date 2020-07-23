@@ -274,8 +274,8 @@ def run(fn, tf_args, cluster_meta, tensorboard, log_dir, queues, background):
       hosts.append("{0}:{1}".format(nhost, nport))
       cluster_spec[njob] = hosts
 
-    # update TF_CONFIG if cluster spec has a 'master' node (i.e. tf.estimator)
-    if 'master' in cluster_spec or 'chief' in cluster_spec:
+    # update TF_CONFIG if cluster spec has a 'main' node (i.e. tf.estimator)
+    if 'main' in cluster_spec or 'chief' in cluster_spec:
       tf_config = json.dumps({
         'cluster': cluster_spec,
         'task': {'type': job_name, 'index': task_index},

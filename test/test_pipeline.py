@@ -191,7 +191,7 @@ class PipelineTest(test.SparkTest):
             cost = tf.reduce_mean(tf.square(y_ - y), name='cost')
             optimizer = tf.train.GradientDescentOptimizer(0.1).minimize(cost, global_step)
 
-          with tf.train.MonitoredTrainingSession(master=server.target,
+          with tf.train.MonitoredTrainingSession(main=server.target,
                                                  is_chief=(ctx.task_index == 0),
                                                  checkpoint_dir=args.model_dir,
                                                  save_checkpoint_steps=20) as sess:
@@ -344,7 +344,7 @@ class PipelineTest(test.SparkTest):
           optimizer = tf.train.GradientDescentOptimizer(0.5).minimize(cost, global_step)
 
         chief_hooks = [ExportHook(ctx.absolute_path(args.export_dir), x, y)] if args.export_dir else []
-        with tf.train.MonitoredTrainingSession(master=server.target,
+        with tf.train.MonitoredTrainingSession(main=server.target,
                                                is_chief=(ctx.task_index == 0),
                                                checkpoint_dir=args.model_dir,
                                                chief_only_hooks=chief_hooks) as sess:
@@ -385,7 +385,7 @@ class PipelineTest(test.SparkTest):
           cost = tf.reduce_mean(tf.square(y_ - y), name='cost')
           optimizer = tf.train.GradientDescentOptimizer(0.5).minimize(cost, global_step)
 
-        with tf.train.MonitoredTrainingSession(master=server.target,
+        with tf.train.MonitoredTrainingSession(main=server.target,
                                                is_chief=(ctx.task_index == 0),
                                                checkpoint_dir=args.model_dir) as sess:
           step = 0
