@@ -184,5 +184,5 @@ if __name__ == "__main__":
   args = parser.parse_args()
   print("args:", args)
 
-  cluster = TFCluster.run(sc, main, args, args.cluster_size, args.num_ps, tensorboard=args.tensorboard, input_mode=TFCluster.InputMode.TENSORFLOW, log_dir=args.model, master_node='master')
+  cluster = TFCluster.run(sc, main, args, args.cluster_size, args.num_ps, tensorboard=args.tensorboard, input_mode=TFCluster.InputMode.TENSORFLOW, log_dir=args.model, main_node='main')
   cluster.shutdown()

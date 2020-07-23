@@ -136,7 +136,7 @@ def map_fun(args, ctx):
       tf.gfile.MkDir(output_dir)
       output_file = tf.gfile.Open("{}/part-{:05d}".format(output_dir, task_index), mode='w')
 
-    with tf.train.MonitoredTrainingSession(master=server.target,
+    with tf.train.MonitoredTrainingSession(main=server.target,
                                            is_chief=(task_index == 0),
                                            scaffold=tf.train.Scaffold(init_op=init_op, summary_op=summary_op, saver=saver),
                                            checkpoint_dir=model_dir,

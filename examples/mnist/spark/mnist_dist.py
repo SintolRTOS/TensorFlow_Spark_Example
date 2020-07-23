@@ -101,7 +101,7 @@ def map_fun(args, ctx):
     summary_writer = tf.summary.FileWriter("tensorboard_%d" % worker_num, graph=tf.get_default_graph())
 
     hooks = [tf.train.StopAtStepHook(last_step=args.steps)] if args.mode == "train" else []
-    with tf.train.MonitoredTrainingSession(master=server.target,
+    with tf.train.MonitoredTrainingSession(main=server.target,
                                            is_chief=(task_index == 0),
                                            scaffold=tf.train.Scaffold(init_op=init_op, summary_op=summary_op, saver=saver),
                                            checkpoint_dir=logdir,

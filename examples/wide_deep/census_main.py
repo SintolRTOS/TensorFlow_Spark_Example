@@ -155,5 +155,5 @@ if __name__ == '__main__':
   num_workers = args.cluster_size - args.num_ps
   print("===== num_executors={}, num_workers={}, num_ps={}".format(args.cluster_size, num_workers, args.num_ps))
 
-  cluster = TFCluster.run(sc, main_fun, remainder, args.cluster_size, args.num_ps, False, TFCluster.InputMode.TENSORFLOW, master_node='master')
+  cluster = TFCluster.run(sc, main_fun, remainder, args.cluster_size, args.num_ps, False, TFCluster.InputMode.TENSORFLOW, main_node='main')
   cluster.shutdown()
